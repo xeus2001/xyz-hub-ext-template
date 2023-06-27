@@ -20,12 +20,18 @@ package com.here.naksha.ext.handler;
 
 import com.here.naksha.lib.core.IEventContext;
 import com.here.naksha.lib.core.IEventHandler;
+import com.here.naksha.lib.core.models.features.Connector;
 import com.here.naksha.lib.core.models.payload.Event;
 import com.here.naksha.lib.core.models.payload.XyzResponse;
 import com.here.naksha.lib.core.models.payload.responses.SuccessResponse;
 import org.jetbrains.annotations.NotNull;
 
 public class ExampleJavaHandler implements IEventHandler {
+
+  /**
+   * Just a blank constructor, but currently every handler need one, for the main Naksha to invoke.
+   */
+  ExampleJavaHandler(Connector connector) {}
 
   /**
    * The method invoked by the XYZ-Hub directly (embedded) or indirectly, when running in an HTTP vertx or as AWS lambda.
