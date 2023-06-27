@@ -1,3 +1,5 @@
+package com.here.naksha.ext.handler
+
 import com.here.naksha.lib.core.IEventContext
 import com.here.naksha.lib.core.IEventHandler
 import com.here.naksha.lib.core.models.payload.Event

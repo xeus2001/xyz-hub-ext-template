@@ -83,6 +83,16 @@ tasks {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
         finalizedBy(spotlessApply)
     }
+
+    shadowJar {
+        archiveClassifier.set("all")
+        mergeServiceFiles()
+        isZip64 = true
+        manifest {
+            attributes["Implementation-Title"] = "Naksha Remote Extension"
+            attributes["Main-Class"] = "com.here.naksha.lib.extension.Main"
+        }
+    }
 }
 
 java {
