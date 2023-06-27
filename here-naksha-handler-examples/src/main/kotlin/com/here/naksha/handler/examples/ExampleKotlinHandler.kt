@@ -1,4 +1,4 @@
-package com.here.naksha.ext.handler
+package com.here.naksha.handler.examples
 
 import com.here.naksha.lib.core.IEventContext
 import com.here.naksha.lib.core.IEventHandler

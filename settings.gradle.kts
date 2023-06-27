@@ -8,3 +8,4 @@
  */
 
 rootProject.name = "naksha-remote-extension"
+include("here-naksha-handler-examples")
