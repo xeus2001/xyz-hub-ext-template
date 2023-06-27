@@ -31,7 +31,7 @@ public class ExampleJavaHandler implements IEventHandler {
   /**
    * Just a blank constructor, but currently every handler need one, for the main Naksha to invoke.
    */
-  ExampleJavaHandler(Connector connector) {}
+  public ExampleJavaHandler(Connector connector) {}
 
   /**
    * The method invoked by the XYZ-Hub directly (embedded) or indirectly, when running in an HTTP vertx or as AWS lambda.
