@@ -2,6 +2,7 @@ plugins {
     java
     // https://github.com/johnrengelman/shadow
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.tomgregory.project-order") version "1.0.0"
 }
 
 var ver : String? = rootProject.properties["version"] as String
@@ -12,10 +13,8 @@ if (ver != null) {
 
 tasks {
     shadowJar {
-        // Include the output from subprojects in the shadowJar task
-        subprojects.forEach { subproject ->
-            dependsOn(subproject.tasks.named<Jar>("jar"))
-            from(subproject.tasks.named<Jar>("jar").map { it.archiveFile })
+        subprojects.forEach {
+            configurations.add(it.configurations.runtimeClasspath.get())
         }
         archiveClassifier.set("all")
         mergeServiceFiles()
