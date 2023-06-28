@@ -97,6 +97,11 @@ allprojects {
 
 tasks {
     shadowJar {
+        // Include the output from subprojects in the shadowJar task
+        subprojects.forEach { subproject ->
+            dependsOn(subproject.tasks.named<Jar>("jar"))
+            from(subproject.tasks.named<Jar>("jar").map { it.archiveFile })
+        }
         archiveClassifier.set("all")
         mergeServiceFiles()
         isZip64 = true
@@ -109,11 +114,4 @@ tasks {
 //    register("dgd",shadowJar.class) {
 //
 //    }
-}
-tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
-    // Include the output from subprojects in the shadowJar task
-    subprojects.forEach { subproject ->
-        dependsOn(subproject.tasks.named<Jar>("jar"))
-        from(subproject.tasks.named<Jar>("jar").map { it.archiveFile })
-    }
 }
