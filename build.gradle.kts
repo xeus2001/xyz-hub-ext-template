@@ -24,6 +24,7 @@ allprojects {
         plugin("java-library")
         plugin("com.diffplug.spotless")
         plugin("maven-publish")
+        plugin("com.github.johnrengelman.shadow")
     }
 
     group = rootProject.group
@@ -108,4 +109,11 @@ tasks {
 //    register("dgd",shadowJar.class) {
 //
 //    }
+}
+tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    // Include the output from subprojects in the shadowJar task
+    subprojects.forEach { subproject ->
+        dependsOn(subproject.tasks.named<Jar>("jar"))
+        from(subproject.tasks.named<Jar>("jar").map { it.archiveFile })
+    }
 }
