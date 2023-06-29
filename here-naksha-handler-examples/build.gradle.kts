@@ -2,33 +2,14 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 plugins {
-    java
-    `java-library`
-    `maven-publish`
     // https://github.com/diffplug/spotless
     // gradle spotlessApply
     id("com.diffplug.spotless").version("6.11.0")
-    // https://github.com/johnrengelman/shadow
-    id("com.github.johnrengelman.shadow") version "7.1.2"
     kotlin("jvm") version "1.8.22"
 }
 
 group = "com.here.naksha"
 version = "2.0.3"
-
-repositories {
-    maven(uri("https://repo.osgeo.org/repository/release/"))
-    maven(uri("https://artifactory.in.here.com/artifactory/cme-content-tools-maven-release"))
-    mavenCentral()
-}
-
-dependencies {
-    implementation("org.jetbrains:annotations:24.0.1")
-    implementation("com.here.naksha:here-naksha-lib-extension:2.0.3")
-
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
-}
 
 // https://github.com/diffplug/spotless/tree/main/plugin-gradle
 spotless {
@@ -68,28 +49,11 @@ spotless {
     }
 }
 
-apply {
-    plugin("java-library")
-    plugin("com.diffplug.spotless")
-    plugin("maven-publish")
-    plugin("com.github.johnrengelman.shadow")
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
 tasks {
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
         finalizedBy(spotlessApply)
     }
-
-    test {
-        useJUnitPlatform()
-    }
-
     compileJava {
         finalizedBy(spotlessApply)
     }
