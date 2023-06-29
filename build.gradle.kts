@@ -15,7 +15,8 @@ subprojects {
         plugin("java")
     }
     repositories {
-        // TODO maybe the project order plugin can replace this?
+        // Without this, the subprojects might try to find gradle plugins before they
+        // inherit the repos from the root project
         maven(uri("https://artifactory.in.here.com/artifactory/cme-content-tools-maven-release"))
         mavenCentral()
     }
