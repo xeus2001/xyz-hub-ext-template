@@ -3,13 +3,36 @@ import java.time.format.DateTimeFormatter
 
 plugins {
     // https://github.com/diffplug/spotless
-    // gradle spotlessApply
     id("com.diffplug.spotless").version("6.11.0")
     kotlin("jvm") version "1.8.22"
 }
 
 group = "com.here.naksha"
-version = "2.0.3"
+version = rootProject.version
+
+apply {
+    plugin("java")
+}
+
+// This how to read properties.
+val mavenUrl = (rootProject.properties["mavenUrl"] as String?)?.trim()
+val mavenUser = (rootProject.properties["mavenUser"] as String?)?.trim()
+val mavenPassword = (rootProject.properties["mavenPassword"] as String?)?.trim()
+
+if (mavenUrl != null) {
+    println("Add maven repository: "+mavenUrl)
+    repositories {
+        maven(uri(mavenUrl))
+        mavenCentral()
+    }
+}
+
+dependencies {
+    // Necessary for the handler to implement IEventHandler
+    implementation("org.jetbrains:annotations:24.0.1")
+    implementation("com.here.naksha:here-naksha-lib-core:2.0.3")
+    implementation("com.here.naksha:here-naksha-lib-extension:2.0.3")
+}
 
 // https://github.com/diffplug/spotless/tree/main/plugin-gradle
 spotless {
@@ -58,4 +81,3 @@ tasks {
         finalizedBy(spotlessApply)
     }
 }
-
