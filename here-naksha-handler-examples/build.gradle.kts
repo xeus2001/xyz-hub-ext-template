@@ -34,7 +34,6 @@ dependencies {
     // Necessary for the handler to implement IEventHandler
     implementation("org.jetbrains:annotations:24.0.1")
     implementation("com.here.naksha:here-naksha-lib-core:2.0.3")
-    implementation("com.here.naksha:here-naksha-lib-extension:2.0.3")
 }
 
 // https://github.com/diffplug/spotless/tree/main/plugin-gradle

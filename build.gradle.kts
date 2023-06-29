@@ -15,6 +15,27 @@ if (ver != null) {
     version = ver as String
 }
 
+dependencies {
+    // Necessary for the Main class to be included in the fat jar
+    implementation("com.here.naksha:here-naksha-lib-extension:2.0.3")
+}
+
+// This how to read properties.
+val mavenUrl = (rootProject.properties["mavenUrl"] as String?)?.trim()
+val mavenUser = (rootProject.properties["mavenUser"] as String?)?.trim()
+val mavenPassword = (rootProject.properties["mavenPassword"] as String?)?.trim()
+
+if (mavenUrl != null) {
+    println("Add maven repository: "+mavenUrl)
+    repositories {
+        maven(uri(mavenUrl))
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
 tasks {
     shadowJar {
         subprojects.forEach { subproject ->
