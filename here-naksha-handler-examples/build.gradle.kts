@@ -23,8 +23,11 @@ if (mavenUrl != null) {
     println("Add maven repository: "+mavenUrl)
     repositories {
         maven(uri(mavenUrl))
-        mavenCentral()
     }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
