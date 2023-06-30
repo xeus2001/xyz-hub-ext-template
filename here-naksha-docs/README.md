@@ -1,8 +1,27 @@
 # Naksha Extension Template
 
-Template for proprietary Naksha extensions.
+[img_purpose]: diagrams/purpose.png
 
-To use this, you should first clone the repository. Review the example handle classes in module 
+This is Template repository for proprietary Naksha extensions.
+
+## Purpose
+
+![Purpose][img_purpose]
+
+**What is Extension ?**
+
+* Extension is a detached API module that can be developed/maintained in isolation to core XYZ Service.
+* Extensions are not expected to process external API calls directly. Main XYZ Service communicates with Extensions using internal API calls.
+
+**Why is it required ?**
+
+* Extensions are required to attach **custom API processing** logic without modifying main XYZ Service.
+* There can also be need to support **custom Data Storage**, outside of what is supported by main XYZ Service.
+
+
+## How to create Extension
+
+To create extension, you should first clone the repository. Review the example handle classes in module 
 `here-naksha-handler-examples` to know how to write a custom handler. Then create your own new 
 module for your own handler code.
 
