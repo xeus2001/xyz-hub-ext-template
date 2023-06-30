@@ -38,7 +38,38 @@ Add the definition `title=NEW-NAME-HERE` in a new line, with the name itself unq
 
 Similarly, create a new subproject with the same naming convention above. This should be where you put your code later.
 
-### 2. Add Custom logic
+### 2. Add dependencies
+The Naksha artifacts are available in the HERE Artifactory in [cme-content-tools-maven-release](https://artifactory.in.here.com/ui/repos/tree/General/cme-content-tools-maven-release/com/here/naksha/).
+To be able to use the Naksha you need to add the HERE Artifactory to:
+
+pom.xml
+```xml
+<metadata>
+  <groupId>com.here.naksha</groupId>
+  <artifactId>here-naksha-lib-core</artifactId>
+  <versioning>
+    <latest>{$VERSION}</latest>
+    <release>{$VERSION}</release>
+    <versions>
+      <version>{$VERSION}</version>
+    </versions>
+  </versioning>
+</metadata> 
+````
+
+build.gradle.kts
+```gradle
+repositories {
+  mavenLocal()
+  maven(uri("https://artifactory.in.here.com/artifactory/cme-content-tools-maven-release"))
+  mavenCentral()
+}
+dependencies {
+  implementation("com.here.naksha:here-naksha-lib-core:{$VERSION}")
+}
+```
+
+### 3. Add Custom logic
 
 Review the example handle classes in module 
 `here-naksha-handler-examples` to know how to write a custom handler. Then create your own new 
@@ -51,14 +82,14 @@ TODO :
 
 
 
-### 3. Add JUnits
+### 4. Add JUnits
 
 TODO : 
 * Add examples of JUnits
 
 
 
-### 4. Compile and Build
+### 5. Compile and Build
 
 To create a shadow jar:
 
@@ -83,7 +114,7 @@ echo title="ADD-SOME-PROJECT-TITLE" >> ~/.gradle/gradle.properties
 ```
 
 
-### 5. Run on local
+### 6. Run on local
 
 TODO :
 * Steps to run XYZ Service on local
