@@ -23,7 +23,9 @@ This is Template repository for proprietary Naksha extensions.
 
 ### 1. Create Repository
 
-To create extension, you should first fork the repository with new name following convention - `<team>-ext-<purpose>`:
+To create extension, you should first fork the repository. You can also change the name of your
+forked repo, but more importantly it is advisable to define a new name for the jar artifact, and the
+pakage that will contain your custom handler code, following this convention - `<team>-ext-<purpose>`:
 * Where,
   * `<team>` = Name of the team owning the extension, e.g. `naksha` (default), `dcu` ...
   * `<purpose>` = Uniquely define the purpose of extension, e.g. `validation`, `dcu-storage` ...
@@ -31,12 +33,17 @@ To create extension, you should first fork the repository with new name followin
   * `naksha-ext-validation`
   * `dcu-ext-dlb-storage`
 
+To change the title of the jar, create (if not exist) the file `gradle.properties` at the root directory of this project.
+Add the definition `title=NEW-NAME-HERE` in a new line, with the name itself unquoted.
+
+Similarly, create a new subproject with the same naming convention above. This should be where you put your code later.
 
 ### 2. Add Custom logic
 
 Review the example handle classes in module 
 `here-naksha-handler-examples` to know how to write a custom handler. Then create your own new 
-module for your own handler code.
+module for your own handler code. Like mentioned above, notice the package name in the example. Your package name should reflect important information about 
+your team and the usage, like in the naming convention above.
 
 TODO : 
 * Add examples of custom handler (one without DB storage, one with DB storage)
