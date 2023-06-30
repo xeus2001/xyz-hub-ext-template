@@ -21,11 +21,39 @@ This is Template repository for proprietary Naksha extensions.
 
 ## How to create Extension
 
-To create extension, you should first clone the repository. Review the example handle classes in module 
+### 1. Create Repository
+
+To create extension, you should first fork the repository with new name following convention - `<team>-ext-<purpose>`:
+* Where,
+  * `<team>` = Name of the team owning the extension, e.g. `naksha` (default), `dcu` ...
+  * `<purpose>` = Uniquely define the purpose of extension, e.g. `validation`, `dcu-storage` ...
+* For example,
+  * `naksha-ext-validation`
+  * `dcu-ext-dlb-storage`
+
+
+### 2. Add Custom logic
+
+Review the example handle classes in module 
 `here-naksha-handler-examples` to know how to write a custom handler. Then create your own new 
 module for your own handler code.
 
-Eventually, create a shadow jar:
+TODO : 
+* Add examples of custom handler (one without DB storage, one with DB storage)
+
+
+
+
+### 3. Add JUnits
+
+TODO : 
+* Add examples of JUnits
+
+
+
+### 4. Compile and Build
+
+To create a shadow jar:
 
 ```bash
 # Use system gradle version to create a wrapper with the correct gradle version.
@@ -36,7 +64,7 @@ gradle wrapper
 java -jar build/libs/naksha-extension-all.jar 2323
 ```
 
-## Maven Repository
+**Maven Repository**
 
 If you need to add a specific company maven repository to be checked before the maven central, 
 create a `gradle.properties` file in your home directory and add the URL and the title:
@@ -46,3 +74,12 @@ touch ~/.gradle/gradle.properties
 echo mavenUrl="ADD-YOUR-MAVEN-URL" >> ~/.gradle/gradle.properties
 echo title="ADD-SOME-PROJECT-TITLE" >> ~/.gradle/gradle.properties
 ```
+
+
+### 5. Run on local
+
+TODO :
+* Steps to run XYZ Service on local
+* Steps to run XYZ Extension on local
+* Steps to configure Connector, Space in XYZ Service
+* Steps to validate end-to-end REST API behaviour
