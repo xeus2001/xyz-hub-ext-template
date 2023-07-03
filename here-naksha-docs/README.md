@@ -76,17 +76,105 @@ Review the example handle classes in module
 module for your own handler code. Like mentioned above, notice the package name in the example. Your package name should reflect important information about 
 your team and the usage, like in the naming convention above.
 
-TODO : 
-* Add examples of custom handler (one without DB storage, one with DB storage)
+#### 1. Custom handler example with Modify Features Event request.
+Below is the basic handler example implemented by using Naksha artifacts, We have used ModifyFeaturesEvent for an example.
+```java
+public class ValidationHandler implements IEventHandler {
 
+  public ValidationHandler(@NotNull Connector connector) throws XyzErrorException {
+  }
 
+  public @NotNull
+  XyzResponse processEvent(@NotNull IEventContext eventContext) throws XyzErrorException {
+    final Event event = eventContext.getEvent();
+    if (event instanceof ModifyFeaturesEvent mfe) {
+      final List<Feature> insertFeatures = mfe.getInsertFeatures();
+      //mfe.getUpdateFeatures();
+      //mfe.getUpsertFeatures();
+      //mfe.getDeleteFeatures();
+      if (insertFeatures != null) {
+        for (final Feature feature : insertFeatures) {
+          //Add your logic here
+        }
+      }
+    }
+    //Return your response
+    //return eventContext.sendUpstream(event);    
+    return new SuccessResponse()
+            .withStatus(String.format("Example success response for event with stream ID %s", event.getStreamId()));
+  }
+}
+```
+
+#### 2. Custom handler example with Database storage.
+Below is the basic code to use database configuration in your handler, You might need to add psql dependencies in your repository to use below DataBase code.
+```java
+public class ExamplePsqlHandler implements IEventHandler {
+  public ExamplePsqlHandler(@NotNull Connector connector) throws XyzErrorException {
+    sqlConfig = new PsqlConfigBuilder()
+            .withAppName("testApp")
+            .withSchema("testSchema")
+            .withDb("testDB")
+            .withHost("testHost")
+            .withPort(5353)
+            .build();
+  }
+  final PsqlConfig sqlConfig;
+
+  @Override
+  public @NotNull XyzResponse processEvent(@NotNull IEventContext eventContext) throws XyzErrorException {
+    final Event event = eventContext.getEvent();
+    //You case use sqlConfig and add DB logic
+    System.out.println(sqlConfig.appName);
+    if (event instanceof ModifyFeaturesEvent mfe) {
+      final List<Feature> insertFeatures = mfe.getInsertFeatures();
+      //mfe.getUpdateFeatures();
+      //mfe.getUpsertFeatures();
+      //mfe.getDeleteFeatures();
+      //eventContext.sendUpstream(new GetFeaturesByBBoxEvent());
+      if (insertFeatures != null) {
+        for (final Feature feature : insertFeatures) {
+          //Add your logic here
+        }
+      }
+    }
+    //return accordingly
+    return null;
+  }
+}
+```
 
 ### 4. Add JUnits
+To simulate and test the real-life example you have to follow few steps:
+- Preparing an event: For testing purpose we are using json file from resources.
+- Prepare context and Inject upstream-handler.
+- Simulate connector config. 
+- Simulate event-pipeline and call the handler.
+```java
+ @Test
+    public void test() throws Exception {
+        // Prepare event.
+        final ModifyFeaturesEvent event = new ModifyFeaturesEvent();
+        final ArrayList<com.here.naksha.lib.core.models.geojson.implementation.Feature> features = new ArrayList<>();
+        final String topo1 = IoHelp.readResource("Topology1.json");
+        //converting it from mom specific feature type to Naksha feature
+        final com.here.naksha.lib.core.models.geojson.implementation.Feature topo1Feature = JsonSerializable.deserialize(topo1, com.here.naksha.lib.core.models.geojson.implementation.Feature.class);
+        features.add(topo1Feature);
+        event.setInsertFeatures(features);
+        // Prepare context and inject our own upstream-handler.
+        final TestEventContext context = new TestEventContext(event, (evt)->{
+            assertNotNull(evt);
+            return new ErrorResponse();
+        });
+        // Simulate connector config as it would come from Naksha-Hub (holding class name).
+        final Connector connector = new Connector("test", ValidationHandler.class);
+        // Create a new instance of the connector class.
+        final IEventHandler handler = connector.newInstance();
+        // Simulate the event-pipeline and call the handler.
+        handler.processEvent(context);
+    }
 
-TODO : 
-* Add examples of JUnits
-
-
+```
 
 ### 5. Compile and Build
 
