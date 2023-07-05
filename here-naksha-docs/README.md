@@ -125,7 +125,7 @@ public class ExamplePsqlHandler implements IEventHandler {
   public @NotNull XyzResponse processEvent(@NotNull IEventContext eventContext) throws XyzErrorException {
     final Event event = eventContext.getEvent();
     //You case use sqlConfig and add DB logic
-    System.out.println(sqlConfig.appName);
+    logger.info("sqlConfig App name is :{} ", sqlConfig.appName);
     if (event instanceof ModifyFeaturesEvent mfe) {
       final List<Feature> insertFeatures = mfe.getInsertFeatures();
       //mfe.getUpdateFeatures();
@@ -139,7 +139,8 @@ public class ExamplePsqlHandler implements IEventHandler {
       }
     }
     //return accordingly
-    return null;
+    return new SuccessResponse()
+            .withStatus(String.format("Example success response for event with stream ID %s", event.getStreamId()));
   }
 }
 ```
