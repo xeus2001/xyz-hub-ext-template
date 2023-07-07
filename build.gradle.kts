@@ -17,7 +17,7 @@ if (ver != null) {
 
 dependencies {
     // Necessary for the Main class to be included in the fat jar
-    implementation("com.here.naksha:here-naksha-lib-extension:2.0.3")
+    implementation("com.here.naksha:here-naksha-lib-extension:2.0.4")
 }
 
 // This how to read properties.
