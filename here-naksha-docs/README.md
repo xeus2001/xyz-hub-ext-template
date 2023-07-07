@@ -23,15 +23,17 @@ This is Template repository for proprietary Naksha extensions.
 
 ### 1. Create Repository
 
-To create extension, you should first fork the repository. You can also change the name of your
-forked repo, but more importantly it is advisable to define a new name for the jar artifact, and the
-pakage that will contain your custom handler code, following this convention - `<team>-ext-<purpose>`:
+To create extension, you should first fork the repository. You can also change the name of your forked repo, but more importantly it is advisable to define a new name for the jar artifact, and the package that will contain your custom handler code, following this convention: `<domain>-<team>-<type>-<project>`:
 * Where,
-  * `<team>` = Name of the team owning the extension, e.g. `naksha` (default), `dcu` ...
-  * `<purpose>` = Uniquely define the purpose of extension, e.g. `validation`, `dcu-storage` ...
+  * `<domain>` = Your domain in reverse order, for example `com.foo`. If your [top-level domain](https://en.wikipedia.org/wiki/Top-level_domain) is `.com`, then you can shorten the domain by the [top-level domain](9https://en.wikipedia.org/wiki/Top-level_domain), for example `com.foo` can be shortened to `foo`.
+  * `<team>` = Name of the team owning the extension, e.g. `naksha`, `dcu` ...
+  * `<type>` = The type of the project, technically you are free to use whatever wanted, but recommended values are: `handler`, `lib` or `extension`
+  * `<project>` = The project name, for example `validation` or `sqlite`.
 * For example,
-  * `naksha-ext-validation`
-  * `dcu-ext-dlb-storage`
+  * `here-naksha-ext-validation`
+  * `here-dcu-ext-storage`
+  * `net.foo-bar-ext-sqlite`
+  * ...
 
 To change the title of the jar, create (if not exist) the file `gradle.properties` at the root directory of this project.
 Add the definition `title=NEW-NAME-HERE` in a new line, with the name itself unquoted.
