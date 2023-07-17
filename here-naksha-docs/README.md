@@ -78,7 +78,7 @@ Review the example handle classes in module
 module for your own handler code. Like mentioned above, notice the package name in the example. Your package name should reflect important information about 
 your team and the usage, like in the naming convention above.
 
-#### 1. Custom handler example with Modify Features Event request.
+#### 3.1. Custom handler example with Modify Features Event request.
 Below is the basic handler example implemented by using Naksha artifacts, We have used ModifyFeaturesEvent for an example.
 ```java
 public class ValidationHandler implements IEventHandler {
@@ -108,7 +108,7 @@ public class ValidationHandler implements IEventHandler {
 }
 ```
 
-#### 2. Custom handler example with Database storage.
+#### 3.2. Custom handler example with Database storage.
 Below is the basic code to use database configuration in your handler, You might need to add psql dependencies in your repository to use below DataBase code.
 ```java
 public class ExamplePsqlHandler implements IEventHandler {
@@ -147,7 +147,13 @@ public class ExamplePsqlHandler implements IEventHandler {
 }
 ```
 
-### 4. Add JUnits
+
+### 4. Add Health check
+
+TODO - Instructions to enable/customize standard health-check endpoint.
+
+
+### 5. Add JUnits
 To simulate and test the real-life example you have to follow few steps:
 - Preparing an event: For testing purpose we are using json file from resources.
 - Prepare context and Inject upstream-handler.
@@ -179,7 +185,7 @@ To simulate and test the real-life example you have to follow few steps:
 
 ```
 
-### 5. Compile and Build
+### 6. Compile and Build
 
 To create a shadow jar:
 
@@ -204,7 +210,7 @@ echo title="ADD-SOME-PROJECT-TITLE" >> ~/.gradle/gradle.properties
 ```
 
 
-### 6. Run on local
+### 7. Run on local
 
 TODO :
 * Steps to run XYZ Service on local
