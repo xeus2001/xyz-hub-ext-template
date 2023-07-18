@@ -186,7 +186,8 @@ To simulate and test the real-life example you have to follow few steps:
         // Create a new instance of the connector class.
         final IEventHandler handler = connector.newInstance();
         // Simulate the event-pipeline and call the handler.
-        handler.processEvent(context);
+        XyzResponse response = handler.processEvent(context);
+        assertEquals(response.get("error"),null);
     }
 
 ```
