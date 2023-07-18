@@ -166,6 +166,12 @@ To simulate and test the real-life example you have to follow few steps:
         final ModifyFeaturesEvent event = new ModifyFeaturesEvent();
         final ArrayList<com.here.naksha.lib.core.models.geojson.implementation.Feature> features = new ArrayList<>();
         final String topo1 = IoHelp.readResource("Topology1.json");
+        // Set Validation Profiles & Rules
+        ValidationsProfileRules valProfRules= new ValidationsProfileRules();
+        List<String> profilesToRun = Arrays.asList("SpeedLimit_ResidentialRoad");
+        List<String> rulesToRun = Arrays.asList("WROAD585");
+        valProfRules.setProfilesToRun(profilesToRun);
+        valProfRules.setRulesToRun(rulesToRun);
         //converting it from mom specific feature type to Naksha feature
         final com.here.naksha.lib.core.models.geojson.implementation.Feature topo1Feature = JsonSerializable.deserialize(topo1, com.here.naksha.lib.core.models.geojson.implementation.Feature.class);
         features.add(topo1Feature);
